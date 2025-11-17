@@ -45,20 +45,19 @@ The Claim Triage & Resolution System is a multi-agent AI ensemble that automates
 ## Model Capabilities
 
 ### What This System CAN Do
-1. Extract structured claim data from PDF denial letters (English/Spanish)
+1. Extract structured claim data from PDF denial letters (English)
 2. Retrieve relevant policy sections using dense semantic search
 3. Reason about appeal viability based on policy evidence
 4. Generate formal appeal letters with verifiable policy citations
 5. Detect and block hallucinated policy references (>98% accuracy)
-6. Handle edge cases: poor scan quality, bilingual documents, truncated PDFs
-7. Escalate ambiguous cases to human reviewers
-8. Maintain HIPAA-compliant audit trails
+6. Escalate ambiguous cases to human reviewers
+7. Maintain HIPAA-compliant audit trails
 
 ### What This System CANNOT Do
 1. **Interpret medical necessity** beyond explicit policy language
 2. **Predict appeal success probability** (no historical outcome data)
 3. **Handle handwritten documents** or faxed images (requires OCR preprocessing)
-4. **Process languages beyond English/Spanish** effectively
+4. **Process languages beyond English** effectively
 5. **Resolve contradictory policy sections** (escalates to human)
 6. **Automatically submit appeals** without human approval
 7. **Update policy documents** in real-time (requires manual re-indexing)
@@ -68,7 +67,7 @@ The Claim Triage & Resolution System is a multi-agent AI ensemble that automates
 ## Limitations & Known Issues
 
 ### Technical Limitations
-1. **PDF Quality Dependency:** Scan quality < 200 DPI may reduce extraction confidence to < 0.5
+1. **PDF Quality Dependency:** Scan quality < 200 DPI may reduce extraction confidence to < 0.5, as of now only digital PDFs supported
 2. **Context Window:** Policy documents > 32K tokens require chunking (may lose cross-section context)
 3. **Latency:** Complex cases with >10 policy retrievals may exceed 2-minute SLA
 4. **Cost:** Average $1.80 per case (GPT-4o API costs); scales linearly with volume
@@ -181,25 +180,8 @@ The Claim Triage & Resolution System is a multi-agent AI ensemble that automates
 
 ---
 
-## Contact & Support
-
-**Model Owners:** AI/ML Engineering Team
-**Documentation:** https://docs.company.com/claim-triage/model-card
-**Incident Reporting:** incidents@company.com
-**Compliance Questions:** hipaa-compliance@company.com
-
-**Feedback:** Users should report unexpected behavior via the "Flag for Review" button in the Streamlit UI. All flagged cases are reviewed within 24 hours.
-
----
-
 ## Changelog
 
 | Date | Version | Change | Impact |
 |------|---------|--------|--------|
 | 2025-11-17 | v1.0.0 | Initial release | Production deployment |
-
----
-
-**Last Reviewed:** 2025-11-17
-**Next Review:** 2026-02-17 (Quarterly)
-**Compliance Status:** HIPAA Audit Approved (2025-11-15)

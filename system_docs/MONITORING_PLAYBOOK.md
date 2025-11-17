@@ -204,13 +204,3 @@ curl http://localhost:8000/health | jq '.model_version'
 **L2 (Critical):** On-call SRE → AI/ML Team Lead
 **L3 (Compliance):** Team Lead → HIPAA Officer + VP Engineering
 **L4 (Executive):** VP Engineering → CTO (for regulatory incidents)
-
-**Contact Directory:**
-- On-call SRE: pagerduty.com/claim-triage
-- AI/ML Team Lead: ml-team-lead@company.com
-- HIPAA Officer: compliance@company.com
-
----
-
-**Document Owner:** SRE Team
-**Review Cadence:** Monthly (or after every P0 incident)

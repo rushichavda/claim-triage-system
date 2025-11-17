@@ -408,31 +408,8 @@ class PolicyDocument(BaseModel):
 
 ## Known Limitations
 
-1. **PDF Quality Dependency:** Poor scan quality (< 200 DPI) may reduce extraction confidence
+1. **PDF Quality Dependency:** Poor scan quality (< 200 DPI) may reduce extraction confidence, as of now only digital pdfs supported
 2. **Policy Contradiction Handling:** System escalates contradictory policies rather than resolving
 3. **Bilingual Support:** Optimized for English/Spanish; other languages may have reduced accuracy
 4. **Processing Time:** Complex cases with >10 policy retrievals may exceed 2-minute SLA
 
----
-
-## Future Enhancements (Roadmap)
-
-- **Q2 2025:** Multi-modal support (faxes, handwritten forms)
-- **Q3 2025:** Real-time policy update synchronization
-- **Q4 2025:** Predictive appeal success probability scoring
-- **2026:** Integration with external EHR systems (Epic, Cerner)
-
----
-
-## Contact & Support
-
-- **Engineering Team:** team@healthguard.com
-- **On-Call Escalation:** Slack #claims-system-alerts
-- **Documentation:** https://docs.healthguard.com/claim-triage
-- **Incident Reports:** JIRA project CLMS
-
----
-
-**Document Version:** 1.0
-**Last Updated:** 2025-11-13
-**Next Review:** 2025-12-13
