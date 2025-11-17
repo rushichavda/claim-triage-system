@@ -107,74 +107,210 @@ This system implements a **production-grade multi-agent orchestration workflow**
 
 ## 🚀 Quick Start
 
-### Prerequisites
+Choose your setup based on your needs:
+- **Development Mode** - Lightweight, no Docker, for testing and development
+- **Production Mode** - Full stack with Docker, monitoring, and all services
 
+---
+
+### 📦 Development Mode (Recommended for Testing)
+
+Perfect for: Local development, testing, debugging
+
+**What's included:** Core agents, ChromaDB (embedded), no Docker needed
+
+#### Step 1: Prerequisites
+
+```bash
+# Required
+- Python 3.11+
+- OpenAI API key
+```
+
+#### Step 2: Setup Environment
+
+```bash
+# Clone and navigate to directory
+cd claim-triage-system
+
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# Install dependencies
+pip install -e .
+
+# Configure environment
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY
+```
+
+#### Step 3: Generate Test Data
+
+```bash
+# Set your API key
+export OPENAI_API_KEY="sk-proj-your-key-here"
+
+# Generate 25 test files (5 policies + 20 test cases)
+python scripts/generate_data_simple.py
+```
+
+**Output:** `data/policy_docs/` and `data/test_cases/` populated with test files
+
+#### Step 4: Index Policies
+
+```bash
+# Index policy documents into ChromaDB (embedded mode)
+python scripts/index_policies_openai.py
+```
+
+**Output:** ChromaDB vector store created at `data/vector_store/`
+
+#### Step 5: Run Tests
+
+```bash
+# Run unit tests
+pytest tests/unit/ -v
+
+# Run regression suite (validates all 20 test cases)
+python scripts/run_regression_suite.py
+```
+
+**Expected:** Hallucination rate <2%, Evidence coverage >85%
+
+#### Step 6: Test Single Claim
+
+```bash
+# Process a single claim denial
+python scripts/test_single_claim.py
+```
+
+**That's it!** You now have a working development environment.
+
+**What you DON'T need in dev mode:**
+- ❌ Docker / Docker Compose
+- ❌ PostgreSQL database
+- ❌ Redis cache
+- ❌ Streamlit UI
+- ❌ Prometheus / Grafana monitoring
+
+---
+
+### 🐳 Production Mode (Full Stack)
+
+Perfect for: Production deployment, demos, full feature testing
+
+**What's included:** All services, monitoring, UI, databases
+
+#### Step 1: Prerequisites
+
+```bash
+# Required
 - Python 3.11+
 - Docker & Docker Compose
 - OpenAI API key
-
-### 1. Clone & Setup
-
-```bash
-# Clone repository
-cd claim-triage-system
-
-# Setup environment
-cp .env.example .env
-# Edit .env with your OPENAI_API_KEY
+- 8GB RAM minimum (16GB recommended)
 ```
 
-### 2. Run with Docker
+#### Step 2: Setup Environment
+
+```bash
+# Clone and navigate to directory
+cd claim-triage-system
+
+# Configure environment
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY
+```
+
+#### Step 3: Generate Test Data
+
+```bash
+# Set your API key
+export OPENAI_API_KEY="sk-proj-your-key-here"
+
+# Generate test data
+python scripts/generate_data_simple.py
+```
+
+#### Step 4: Index Policies
+
+```bash
+# Create virtual environment (for indexing script)
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+
+# Index policies
+python scripts/index_policies_openai.py
+```
+
+#### Step 5: Start Docker Stack
 
 ```bash
 # Start all services
 docker-compose up -d
 
-# Check service status
+# Check services are running
 docker-compose ps
 
 # View logs
-docker-compose logs -f
+docker-compose logs -f app
 ```
 
-### 3. Access Services
+**Services started:**
+- ✅ FastAPI (port 8000) - REST API
+- ✅ PostgreSQL (port 5432) - Database
+- ✅ ChromaDB (port 8001) - Vector store
+- ✅ Redis (port 6379) - Cache
+- ✅ Streamlit (port 8501) - UI
+- ✅ Prometheus (port 9090) - Metrics
+- ✅ Grafana (port 3000) - Dashboards
 
-- **Streamlit UI**: http://localhost:8501 (Human review interface)
-- **API Docs**: http://localhost:8000/docs (FastAPI Swagger UI)
-- **Prometheus**: http://localhost:9090 (Metrics)
-- **Grafana**: http://localhost:3000 (Dashboards, admin/admin)
+#### Step 6: Access Services
 
-### 4. Run Demo
+- **API Documentation**: http://localhost:8000/docs
+- **Human Review UI**: http://localhost:8501
+- **Metrics Dashboard**: http://localhost:3000 (login: admin/admin)
+- **Prometheus**: http://localhost:9090
+
+#### Step 7: Run Demo
 
 ```bash
-# Run end-to-end demo
-./run_demo.sh
-
-# Or with Docker
+# Process sample claims through full workflow
 ./run_demo.sh --docker
+```
+
+**That's it!** Full production stack is running.
+
+---
+
+### 🧪 Quick Validation
+
+After setup, verify everything works:
+
+```bash
+# Health check
+curl http://localhost:8000/health
+
+# Process a test claim
+curl -X POST http://localhost:8000/api/v1/claims/process \
+  -F "file=@data/test_cases/synthetic/denial_001_duplicate.pdf"
+
+# Check metrics
+curl http://localhost:9090/metrics | grep hallucination_rate
 ```
 
 ---
 
-## 📦 Installation (Local Development)
+## 📚 Additional Resources
 
-```bash
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -e ".[dev]"
-
-# Run tests
-pytest tests/ -v
-
-# Run linting
-make lint
-
-# Run formatting
-make format
-```
+- **System Architecture**: [`docs/SYSTEM_DOSSIER.md`](docs/SYSTEM_DOSSIER.md)
+- **Citation System Deep-Dive**: [`docs/CITATION_DEEP_DIVE.md`](docs/CITATION_DEEP_DIVE.md)
+- **Monitoring & Alerts**: [`docs/MONITORING_PLAYBOOK.md`](docs/MONITORING_PLAYBOOK.md)
+- **Model Card**: [`docs/MODEL_CARD.md`](docs/MODEL_CARD.md)
+- **Business Case**: [`docs/BUSINESS_CASE.md`](docs/BUSINESS_CASE.md)
+- **Embedding Usage**: [`docs/EMBEDDING_USAGE.md`](docs/EMBEDDING_USAGE.md)
 
 ---
 
@@ -365,7 +501,7 @@ claim-triage-system/
 
 ### Additional Documentation
 
-- **Quick Start Guide**: [`QUICKSTART.md`](QUICKSTART.md) - Step-by-step setup instructions
+- **Setup Comparison**: [`SETUP_COMPARISON.md`](SETUP_COMPARISON.md) - Development vs Production mode comparison
 - **Project Completion Summary**: [`PROJECT_COMPLETION_SUMMARY.md`](PROJECT_COMPLETION_SUMMARY.md)
 - **Implementation Status**: [`docs/IMPLEMENTATION_STATUS.md`](docs/IMPLEMENTATION_STATUS.md)
 - **Model Configuration**: [`docs/MODEL_CONFIGURATION.md`](docs/MODEL_CONFIGURATION.md)
