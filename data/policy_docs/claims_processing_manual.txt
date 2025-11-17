@@ -1,0 +1,42 @@
+HealthGuard Insurance Company
+Claims Processing Manual
+Effective: January 1, 2024
+Document ID: HG-CLAIMS_PROCESSING_MANUAL-2024
+
+======================================================================
+
+### Claims Processing Rules for Healthcare Insurance
+
+To ensure efficient and accurate claims processing, the following rules are established. Adherence to these guidelines will facilitate timely reimbursement and minimize discrepancies.
+
+#### 1. Timely Filing
+- **Standard Filing Period**: Claims must be submitted within **180 days** from the date of service.
+- **Coordination of Benefits**: For claims requiring coordination with other insurers, claims must be submitted within **365 days** from the date of service.
+
+#### 2. Duplicate Detection
+- Claims will be flagged as duplicates if they meet the following criteria:
+  - **Same Patient**: Identified by unique patient identifiers.
+  - **Same Date of Service**: The service date must match.
+  - **Same CPT Code**: The Current Procedural Terminology (CPT) code must be identical.
+  - **Same Provider**: Claims must be submitted by the same healthcare provider.
+- Claims flagged as duplicates will require further review and may be denied unless additional supporting documentation is provided.
+
+#### 3. CPT/ICD Matching
+- Claims must include CPT codes that align with the corresponding ICD (International Classification of Diseases) codes:
+  - Ensure that the CPT code accurately reflects the services rendered and that the ICD code supports the medical necessity of those services.
+  - Claims submitted with mismatched codes will be denied until corrected and resubmitted.
+
+#### 4. Resubmission
+- Providers may resubmit claims that require corrections within **60 days** from the date of the initial denial.
+- The resubmission must include appropriate corrections and any necessary documentation to support the changes made.
+
+### Additional Guidelines
+- **Documentation**: Ensure that all claims are accompanied by the required documentation to substantiate the services rendered, including patient records and any prior authorization if applicable.
+- **Electronic Submission**: Where possible, claims should be submitted electronically to improve processing times and reduce errors.
+- **Contact Information**: For questions regarding claims status or specific processing issues, providers should contact the claims department directly using the contact information provided on the insurance card or website.
+
+By following these claims processing rules, providers can enhance their claims accuracy and ensure they receive timely reimbursements for the services provided.
+
+======================================================================
+
+Contact: 1-800-HEALTH-1 | www.healthguard-insurance.com

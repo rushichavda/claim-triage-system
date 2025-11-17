@@ -1,0 +1,48 @@
+HealthGuard Insurance Company
+Medical Necessity Guidelines
+Effective: January 1, 2024
+Document ID: HG-MEDICAL_NECESSITY_GUIDELINES-2024
+
+======================================================================
+
+# Medical Necessity Guidelines
+
+**Definition of Medical Necessity:**
+Medical necessity refers to services or items that are appropriate, evidence-based, and necessary for the diagnosis or treatment of a medical condition. Services must not be provided primarily for the convenience of the patient or healthcare provider. The goal is to ensure that interventions are clinically justified and supported by objective evidence.
+
+## Imaging Guidelines
+
+### Magnetic Resonance Imaging (MRI)
+
+1. **Indications for MRI:**
+   - MRI is considered medically necessary when there is a clear clinical indication that aligns with evidence-based guidelines. 
+   - An MRI is typically warranted in the following scenarios:
+     - Persistent symptoms after conservative treatment has failed.
+     - Initial conservative management must include at least **6 weeks** of physical therapy (PT) and/or medications.
+     - Acute trauma cases, where the imaging is needed to assess for potential injuries.
+     - The presence of "red flags," which may include symptoms such as significant unexplained weight loss, neurological deficits, severe pain, or other alarming indicators that suggest a serious underlying condition.
+
+2. **Exceptions:**
+   - Imaging may be performed without prior conservative treatment in circumstances of acute trauma or when red flags are present. These exceptions allow for immediate assessment to prevent worsening of the patient’s condition.
+
+## Documentation Requirements
+
+To establish medical necessity, the following documentation must be included in the patient’s medical record:
+
+1. **Clinical Notes:**
+   - Detailed clinical notes must clearly outline the patient’s presenting symptoms, history, and physical examination findings.
+   - Notes should reflect the clinical reasoning for the proposed MRI, including how previous treatments have failed or the justification for immediate imaging based on acute conditions or red flags.
+
+2. **Previous Treatments:**
+   - A comprehensive record of all previous treatments should be documented, including:
+     - Dates and types of conservative treatments (e.g., medications, PT).
+     - Patient response to these treatments, including any improvement or deterioration of symptoms.
+
+3. **Diagnosis Codes:**
+   - Accurate and up-to-date diagnosis codes must be included to reflect the medical necessity for imaging. This ensures that the imaging aligns with the specified diagnosis and supports the rationale for the intervention.
+
+Adhering to these guidelines helps ensure that imaging services provided are appropriate, justified, and rooted in the principles of evidence-based medicine. This not only enhances patient care but also promotes the responsible utilization of healthcare resources.
+
+======================================================================
+
+Contact: 1-800-HEALTH-1 | www.healthguard-insurance.com

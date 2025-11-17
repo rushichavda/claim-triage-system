@@ -1,0 +1,120 @@
+{
+  "policies": [
+    {
+      "file": "prior_authorization_policy.txt",
+      "path": "data/policy_docs/prior_authorization_policy.txt"
+    },
+    {
+      "file": "medical_necessity_guidelines.txt",
+      "path": "data/policy_docs/medical_necessity_guidelines.txt"
+    },
+    {
+      "file": "claims_processing_manual.txt",
+      "path": "data/policy_docs/claims_processing_manual.txt"
+    },
+    {
+      "file": "network_coverage.txt",
+      "path": "data/policy_docs/network_coverage.txt"
+    },
+    {
+      "file": "appeals_process.txt",
+      "path": "data/policy_docs/appeals_process.txt"
+    }
+  ],
+  "normal": [
+    {
+      "file": "denial_001_duplicate.pdf",
+      "path": "data/test_cases/synthetic/denial_001_duplicate.pdf"
+    },
+    {
+      "file": "denial_002_cpt_mismatch.pdf",
+      "path": "data/test_cases/synthetic/denial_002_cpt_mismatch.pdf"
+    },
+    {
+      "file": "denial_003_documentation.pdf",
+      "path": "data/test_cases/synthetic/denial_003_documentation.pdf"
+    },
+    {
+      "file": "denial_004_eligibility.pdf",
+      "path": "data/test_cases/synthetic/denial_004_eligibility.pdf"
+    },
+    {
+      "file": "denial_005_prior_auth.pdf",
+      "path": "data/test_cases/synthetic/denial_005_prior_auth.pdf"
+    }
+  ],
+  "edge": [
+    {
+      "file": "edge_001_poor_scan.pdf",
+      "path": "data/test_cases/edge_cases/edge_001_poor_scan.pdf"
+    },
+    {
+      "file": "edge_002_bilingual.pdf",
+      "path": "data/test_cases/edge_cases/edge_002_bilingual.pdf"
+    },
+    {
+      "file": "edge_003_batch.pdf",
+      "path": "data/test_cases/edge_cases/edge_003_batch.pdf"
+    },
+    {
+      "file": "edge_004_truncated.pdf",
+      "path": "data/test_cases/edge_cases/edge_004_truncated.pdf"
+    },
+    {
+      "file": "edge_005_headers.pdf",
+      "path": "data/test_cases/edge_cases/edge_005_headers.pdf"
+    }
+  ],
+  "adversarial": [
+    {
+      "file": "adv_001_prompt_injection.pdf",
+      "type": "pdf",
+      "path": "data/test_cases/adversarial/adv_001_prompt_injection.pdf"
+    },
+    {
+      "file": "adv_002_fake_policy.pdf",
+      "type": "pdf",
+      "path": "data/test_cases/adversarial/adv_002_fake_policy.pdf"
+    },
+    {
+      "file": "adv_003_swapped_ids.pdf",
+      "type": "pdf",
+      "path": "data/test_cases/adversarial/adv_003_swapped_ids.pdf"
+    },
+    {
+      "file": "adv_004_timestamp.pdf",
+      "type": "pdf",
+      "path": "data/test_cases/adversarial/adv_004_timestamp.pdf"
+    },
+    {
+      "file": "adv_005_hidden_approval.pdf",
+      "type": "pdf",
+      "path": "data/test_cases/adversarial/adv_005_hidden_approval.pdf"
+    },
+    {
+      "file": "adv_policy_001_contradictory.txt",
+      "type": "txt",
+      "path": "data/test_cases/adversarial/adv_policy_001_contradictory.txt"
+    },
+    {
+      "file": "adv_policy_002_footnote.txt",
+      "type": "txt",
+      "path": "data/test_cases/adversarial/adv_policy_002_footnote.txt"
+    },
+    {
+      "file": "adv_policy_003_fake_meta.txt",
+      "type": "txt",
+      "path": "data/test_cases/adversarial/adv_policy_003_fake_meta.txt"
+    },
+    {
+      "file": "adv_policy_004_circular.txt",
+      "type": "txt",
+      "path": "data/test_cases/adversarial/adv_policy_004_circular.txt"
+    },
+    {
+      "file": "adv_policy_005_ambiguous.txt",
+      "type": "txt",
+      "path": "data/test_cases/adversarial/adv_policy_005_ambiguous.txt"
+    }
+  ]
+}

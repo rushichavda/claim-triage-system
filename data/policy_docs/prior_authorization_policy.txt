@@ -1,0 +1,40 @@
+HealthGuard Insurance Company
+Prior Authorization Policy
+Effective: January 1, 2024
+Document ID: HG-PRIOR_AUTHORIZATION_POLICY-2024
+
+======================================================================
+
+**Prior Authorization Policy**
+
+**SECTION 4.2.1 - EMERGENCY EXCEPTION:**
+
+In accordance with our commitment to providing timely and effective care, prior authorization is WAIVED for emergency services rendered within 24 hours of admission to the Emergency Department (ED). This exception is made to ensure that patients receive immediate care for urgent medical needs without delays associated with prior authorization processes. 
+
+Emergency services are defined as those that are necessary to treat conditions that could reasonably be expected to result in placing the health of the individual in serious jeopardy, causing serious impairment to bodily functions, or causing serious dysfunction of any bodily organ or part. Providers are encouraged to communicate any related services that may require prior authorization following the stabilization of the patient.
+
+**SECTION 5.3 - SERVICES REQUIRING AUTHORIZATION (AUTH):**
+
+The following services require prior authorization to ensure medical necessity and appropriateness of care:
+
+- **MRI/CT Scans:** All non-emergency MRI and CT imaging studies require prior authorization. This includes any imaging that is not performed in the context of an emergency situation as defined in Section 4.2.1.
+
+- **Surgeries Over $5,000:** All surgical procedures anticipated to exceed a total cost of $5,000 are subject to prior authorization. This includes both inpatient and outpatient surgical services and ensures that both the medical necessity and the appropriateness of the procedure are reviewed.
+
+- **Specialty Consultations:** All consultations with specialists outside of a primary care setting require prior authorization. This measure is in place to facilitate appropriate referrals and ensure that patients are receiving the necessary and correct level of care.
+
+**SECTION 6.1 - TIMELINES:**
+
+To ensure timely processing of prior authorization requests, the following timelines are established:
+
+- **Standard Requests:** Prior authorization requests that do not qualify as urgent must be processed within 15 business days from the date of submission. Providers are encouraged to submit complete and accurate information to prevent delays in the review process.
+
+- **Urgent Requests:** Requests that are deemed urgent, requiring immediate attention due to the patient's health status, must be processed within 72 hours of receipt. An urgent request is defined as a situation where waiting for standard processing could jeopardize the patient's health or ability to regain maximum function.
+
+This prior authorization policy is designed to balance the need for timely access to care with the necessity of ensuring that services provided are medically appropriate and necessary. Providers are strongly encouraged to familiarize themselves with these guidelines to facilitate efficient care for their patients. 
+
+For any questions or clarifications regarding this policy, please contact our Prior Authorization Department.
+
+======================================================================
+
+Contact: 1-800-HEALTH-1 | www.healthguard-insurance.com

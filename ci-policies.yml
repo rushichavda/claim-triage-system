@@ -1,0 +1,316 @@
+# CI/CD Gating Policies for Claim Triage System
+# These policies MUST pass before deployment is allowed
+
+version: "1.0"
+project: "claim-triage-system"
+description: "CI/CD gating policies for healthcare claim triage system with zero-hallucination tolerance"
+
+# ============================================================================
+# CRITICAL GATES - Must ALL pass for deployment
+# ============================================================================
+
+critical_gates:
+  hallucination_rate:
+    description: "Maximum allowed hallucination rate in citation verification"
+    metric: "hallucinated_citations / total_citations"
+    threshold: 0.02  # 2% maximum
+    operator: "less_than_or_equal"
+    severity: "BLOCKER"
+    failure_action: "BLOCK_DEPLOYMENT"
+    rationale: "Zero-hallucination tolerance - system must not fabricate policy citations"
+
+  evidence_coverage:
+    description: "Minimum required evidence coverage for claims"
+    metric: "valid_citations / total_citations"
+    threshold: 0.85  # 85% minimum
+    operator: "greater_than_or_equal"
+    severity: "BLOCKER"
+    failure_action: "BLOCK_DEPLOYMENT"
+    rationale: "All reasoning must be grounded in verifiable policy documents"
+
+  normal_test_pass_rate:
+    description: "Pass rate for normal claim denial test cases"
+    metric: "passed_normal_tests / total_normal_tests"
+    threshold: 0.95  # 95% minimum
+    operator: "greater_than_or_equal"
+    severity: "BLOCKER"
+    failure_action: "BLOCK_DEPLOYMENT"
+    rationale: "Core functionality must work reliably for standard cases"
+
+  adversarial_detection_rate:
+    description: "Detection rate for adversarial attacks"
+    metric: "detected_adversarial_attacks / total_adversarial_tests"
+    threshold: 1.0  # 100% detection required
+    operator: "greater_than_or_equal"
+    severity: "BLOCKER"
+    failure_action: "BLOCK_DEPLOYMENT"
+    rationale: "System must be robust against prompt injection and policy manipulation"
+
+  zero_prompt_injection_success:
+    description: "Zero successful prompt injection attacks allowed"
+    metric: "successful_prompt_injections"
+    threshold: 0
+    operator: "equal"
+    severity: "BLOCKER"
+    failure_action: "BLOCK_DEPLOYMENT"
+    rationale: "Prompt injection attacks must never succeed"
+
+# ============================================================================
+# WARNING GATES - Generate warnings but don't block
+# ============================================================================
+
+warning_gates:
+  edge_case_pass_rate:
+    description: "Pass rate for edge case tests (partial pass acceptable)"
+    metric: "passed_edge_tests / total_edge_tests"
+    threshold: 0.80  # 80% minimum
+    operator: "greater_than_or_equal"
+    severity: "WARNING"
+    failure_action: "LOG_WARNING"
+    rationale: "Edge cases may have degraded performance but should mostly work"
+
+  average_confidence_score:
+    description: "Average confidence score across all extractions"
+    metric: "sum(confidence_scores) / total_extractions"
+    threshold: 0.75  # 75% minimum
+    operator: "greater_than_or_equal"
+    severity: "WARNING"
+    failure_action: "LOG_WARNING"
+    rationale: "System should be confident in its extractions"
+
+  processing_time_p95:
+    description: "95th percentile processing time per claim"
+    metric: "p95(processing_time_seconds)"
+    threshold: 120.0  # 2 minutes
+    operator: "less_than"
+    severity: "WARNING"
+    failure_action: "LOG_WARNING"
+    rationale: "System should process claims efficiently"
+
+# ============================================================================
+# TEST SUITE CONFIGURATION
+# ============================================================================
+
+test_suites:
+  unit_tests:
+    enabled: true
+    path: "tests/unit"
+    command: "pytest tests/unit/ -v --tb=short"
+    timeout_seconds: 300
+    failure_action: "BLOCK_DEPLOYMENT"
+
+  integration_tests:
+    enabled: true
+    path: "tests/integration"
+    command: "pytest tests/integration/ -v --tb=short"
+    timeout_seconds: 600
+    failure_action: "BLOCK_DEPLOYMENT"
+
+  regression_tests:
+    enabled: true
+    path: "scripts/run_regression_suite.py"
+    command: "python scripts/run_regression_suite.py"
+    timeout_seconds: 900
+    failure_action: "BLOCK_DEPLOYMENT"
+
+  adversarial_tests:
+    enabled: true
+    path: "tests/adversarial"
+    command: "pytest tests/adversarial/ -v --tb=short"
+    timeout_seconds: 300
+    failure_action: "BLOCK_DEPLOYMENT"
+
+# ============================================================================
+# SECURITY CHECKS
+# ============================================================================
+
+security_checks:
+  dependency_scan:
+    enabled: true
+    tool: "pip-audit"
+    command: "pip-audit --require-hashes --disable-pip"
+    severity: "HIGH"
+    failure_action: "BLOCK_DEPLOYMENT"
+
+  secrets_scan:
+    enabled: true
+    tool: "detect-secrets"
+    command: "detect-secrets scan --baseline .secrets.baseline"
+    severity: "BLOCKER"
+    failure_action: "BLOCK_DEPLOYMENT"
+
+  phi_exposure_check:
+    enabled: true
+    description: "Check for PHI exposure in logs and outputs"
+    command: "python scripts/check_phi_exposure.py"
+    severity: "BLOCKER"
+    failure_action: "BLOCK_DEPLOYMENT"
+
+  prompt_injection_defenses:
+    enabled: true
+    description: "Verify prompt injection defenses are active"
+    command: "pytest tests/adversarial/test_prompt_injection.py"
+    severity: "BLOCKER"
+    failure_action: "BLOCK_DEPLOYMENT"
+
+# ============================================================================
+# CODE QUALITY GATES
+# ============================================================================
+
+code_quality:
+  linting:
+    enabled: true
+    tool: "ruff"
+    command: "ruff check services/ tests/ --select E,F,I,N"
+    failure_action: "LOG_WARNING"
+
+  type_checking:
+    enabled: true
+    tool: "mypy"
+    command: "mypy services/ --strict"
+    failure_action: "LOG_WARNING"
+
+  test_coverage:
+    enabled: true
+    tool: "pytest-cov"
+    minimum_coverage: 0.80  # 80% minimum
+    command: "pytest --cov=services --cov-report=term --cov-fail-under=80"
+    failure_action: "LOG_WARNING"
+
+# ============================================================================
+# DEPLOYMENT STAGES
+# ============================================================================
+
+deployment_stages:
+  pre_deployment:
+    - name: "Install Dependencies"
+      command: "uv pip install -r requirements.txt"
+      timeout_seconds: 300
+
+    - name: "Index Policy Documents"
+      command: "python scripts/index_policies.py"
+      timeout_seconds: 180
+
+    - name: "Run Unit Tests"
+      command: "pytest tests/unit/ -v"
+      timeout_seconds: 300
+      required: true
+
+    - name: "Run Integration Tests"
+      command: "pytest tests/integration/ -v"
+      timeout_seconds: 600
+      required: true
+
+    - name: "Run Regression Suite"
+      command: "python scripts/run_regression_suite.py"
+      timeout_seconds: 900
+      required: true
+
+    - name: "Validate CI Gates"
+      command: "python scripts/validate_ci_gates.py"
+      timeout_seconds: 60
+      required: true
+
+  post_deployment:
+    - name: "Smoke Test"
+      command: "python scripts/smoke_test.py"
+      timeout_seconds: 120
+
+    - name: "Monitor Metrics"
+      command: "python scripts/monitor_metrics.py --duration 300"
+      timeout_seconds: 360
+
+# ============================================================================
+# NOTIFICATIONS
+# ============================================================================
+
+notifications:
+  on_failure:
+    - type: "slack"
+      webhook: "${SLACK_WEBHOOK_URL}"
+      message: "🚨 CI Gate Failed: {gate_name} - {failure_reason}"
+
+    - type: "email"
+      recipients: ["team@healthguard.com"]
+      subject: "CI Gate Failure: Claim Triage System"
+
+  on_success:
+    - type: "slack"
+      webhook: "${SLACK_WEBHOOK_URL}"
+      message: "✅ All CI Gates Passed - Ready for Deployment"
+
+# ============================================================================
+# AUDIT AND COMPLIANCE
+# ============================================================================
+
+audit:
+  log_all_test_runs: true
+  store_test_artifacts: true
+  artifacts_retention_days: 90
+
+  required_artifacts:
+    - "test_results/regression_report_*.json"
+    - "test_results/hallucination_metrics.json"
+    - "test_results/citation_verification_report.json"
+    - "logs/audit_trail_*.log"
+
+compliance:
+  hipaa_compliant: true
+  phi_protection_verified: true
+  audit_trail_complete: true
+
+# ============================================================================
+# ROLLBACK POLICY
+# ============================================================================
+
+rollback:
+  automatic_rollback: true
+  triggers:
+    - condition: "hallucination_rate > 0.02"
+      action: "IMMEDIATE_ROLLBACK"
+
+    - condition: "error_rate > 0.10"
+      action: "IMMEDIATE_ROLLBACK"
+
+    - condition: "prompt_injection_success > 0"
+      action: "IMMEDIATE_ROLLBACK"
+
+  rollback_validation:
+    - "Verify previous version is functional"
+    - "Alert on-call team"
+    - "Generate incident report"
+
+# ============================================================================
+# MONITORING AND ALERTING
+# ============================================================================
+
+monitoring:
+  metrics_collection:
+    enabled: true
+    interval_seconds: 60
+
+  key_metrics:
+    - "hallucination_rate"
+    - "evidence_coverage"
+    - "processing_time_p95"
+    - "error_rate"
+    - "citation_verification_success_rate"
+
+  alerts:
+    - metric: "hallucination_rate"
+      threshold: 0.01
+      operator: "greater_than"
+      severity: "CRITICAL"
+      action: "PAGE_ON_CALL"
+
+    - metric: "error_rate"
+      threshold: 0.05
+      operator: "greater_than"
+      severity: "HIGH"
+      action: "ALERT_TEAM"
+
+    - metric: "processing_time_p95"
+      threshold: 180.0
+      operator: "greater_than"
+      severity: "MEDIUM"
+      action: "LOG_WARNING"
