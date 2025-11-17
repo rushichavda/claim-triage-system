@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip show:*)",
+      "Bash(sqlite3:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(python3:*)",
+      "Bash(python scripts/fix_chromadb.py:*)",
+      "Bash(python:*)",
+      "Bash($env:PYTHONIOENCODING=\"utf-8\")",
+      "Bash(set:*)",
+      "Bash(del \"data\\vector_store\\chroma.sqlite3\")",
+      "Bash(rm:*)",
+      "Bash(pip install:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
