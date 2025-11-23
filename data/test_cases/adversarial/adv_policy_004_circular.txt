@@ -1,0 +1,5 @@
+
+SECTION A: See Section B for requirements
+SECTION B: See Section C for requirements
+SECTION C: See Section A for requirements
+[Circular reference]

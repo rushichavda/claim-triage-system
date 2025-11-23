@@ -1,0 +1,8 @@
+
+Services covered if:
+- Within 180 days of effective date
+- Before termination date
+
+BUT effective date: Not specified
+AND termination: See Appendix Z (doesn't exist)
+[Temporal ambiguity]

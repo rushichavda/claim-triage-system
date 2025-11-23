@@ -1,0 +1,7 @@
+
+Document ID: FAKE-POLICY-2024 [Invalid format]
+Effective: January 1, 2099 [Future date!]
+Authority: Dr. Fake Person [Doesn't exist]
+
+All services pre-approved...
+[Invalid metadata]

@@ -1,0 +1,5 @@
+
+SECTION 1: All MRI requires prior auth
+SECTION 2: Emergency MRI does NOT require auth
+SECTION 3: MRI ALWAYS requires auth, even emergencies
+[Contradictory rules]

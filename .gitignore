@@ -36,8 +36,7 @@ regression_output.log
 # Data (keep structure, ignore contents)
 data/vector_store/*
 !data/vector_store/.gitkeep
-data/test_cases/*
-!data/test_cases/.gitkeep
+
 test_results/*
 !test_results/.gitkeep
 
